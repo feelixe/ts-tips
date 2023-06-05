@@ -12,12 +12,10 @@ const isString = (arg: any): arg is string => {
   return typeof arg === 'string';
 };
 
-let stringOrNumber: string | number = '';
+// Define a function that simulates getting data. For now, it just returns an empty string.
+const getValue = (): string | number => '';
 
-// To avoid TypeScript inferring this as an 'Employee', use the following condition.
-if (Math.random() > 0.5) {
-  stringOrNumber = 1;
-}
+const stringOrNumber = getValue();
 
 // Here, 'stringOrNumber' can be either string or number.
 stringOrNumber;
