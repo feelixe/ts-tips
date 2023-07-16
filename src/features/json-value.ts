@@ -3,7 +3,7 @@
  * including primitive types, arrays, and nested objects.
  */
 
-type JSONValue =
+export type JSONValue =
   | string
   | number
   | boolean

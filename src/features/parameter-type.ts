@@ -22,13 +22,13 @@ type InitializeParameters = [client: Client, options?: Options];
 
 // Define the 'Initialize' function that uses rest parameters (...args)
 // and destructuring to handle an array of InitializeParameters type.
-function initialize(...args: InitializeParameters) {
+export function initialize(...args: InitializeParameters) {
   const [client, options] = args;
   console.log(client, options);
 }
 
 // Versus declaring in function.
-function secondInitialize(
+export function secondInitialize(
   client: { name: string; version: string },
   options?: { url: string; enabled: true; path: string },
 ) {
