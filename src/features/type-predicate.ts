@@ -38,7 +38,7 @@ const filteredElements = elements.filter((el) => el !== null);
 //     ^?
 
 // Let's create a generic type predicate to filter out null values.
-function isNotNull<T>(arg: T): arg is Exclude<T, null> {
+function isNotNull<TValue>(arg: TValue): arg is Exclude<TValue, null> {
   return arg !== null;
 }
 

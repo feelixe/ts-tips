@@ -12,3 +12,4 @@ const message = { text: 'hello' };
 // It will always be the string 'hello'.
 const immutableMessage = { text: 'hello' } as const;
 //    ^?
+

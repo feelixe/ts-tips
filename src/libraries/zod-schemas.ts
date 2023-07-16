@@ -13,7 +13,7 @@ const personSchema = z.object({
   // Age field must be a number and at least 18.
   age: z.number().min(18),
   // Email field must be a string and a valid email format.
-  email: z.string().email(),
+  email: z.preprocess((rawData) => rawData, z.string().email()),
 });
 
 // Define an example user input object to demonstrate the validation process.

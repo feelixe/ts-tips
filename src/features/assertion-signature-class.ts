@@ -4,7 +4,7 @@ interface Session {
 }
 
 // Define a Client class.
-class Client {
+export class Client {
   // Property `session` is initially set to null. It can either be null or an object that matches the Session interface.
   public session: Session | null = null;
 

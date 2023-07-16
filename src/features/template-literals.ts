@@ -5,4 +5,4 @@ type Protocol = 'http' | 'https';
 type Url = `${Protocol}://${string}`;
 
 // Initialize a constant 'url' of type 'Url' with a 'https' URL as its value.
-const url: Url = 'https://axakon.se';
+const url: Url = 'http://axakon.se';
