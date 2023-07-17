@@ -1,21 +1,17 @@
 /**
- * Prisma and Drizzle are amazing ORMs for interfacing with your database in a typesafe manner.
+ * Drizzle is a great alternative to Prisma, it's has several benefits.
+ * - No code generation.
+ * - Runs on the Edge.
+ * - Better performance
  */
 import { drizzle } from 'drizzle-orm/node-postgres';
-import {
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from 'drizzle-orm/pg-core';
-import { InferModel } from 'drizzle-orm';
+import { pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { type InferModel } from 'drizzle-orm';
 import { Pool } from 'pg';
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   fullName: text('full_name').notNull(),
-  phone: varchar('phone', { length: 20 }).notNull(),
   role: text('role', { enum: ['user', 'admin'] })
     .default('user')
     .notNull(),
@@ -31,4 +27,4 @@ const pool = new Pool({
 
 const db = drizzle(pool);
 
-db.insert(users).values({ fullName: "Felix"})
+await db.insert(users).values({ fullName: 'Felix', role: 'user' });
