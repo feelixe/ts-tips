@@ -36,10 +36,8 @@ const userInput = {
 // The validation will fail because the age is less than the minimum age defined in the schema.
 // 'person' is typed as Person
 const person = personSchema.parse(userInput);
-//     ^?
 
 // To access the inferred type of a zod schema use z.infer
 type Person = z.infer<typeof personSchema>;
-//     ^?
 
 console.log(person);
