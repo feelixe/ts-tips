@@ -36,7 +36,6 @@ function getData(): Result {
 
 // Call the getData function and store the result.
 const result = getData();
-//     ^?
 
 // If there is an error or if the result is still loading, throw an error.
 // Since execution will stop it's an error or loading, we know for sure that
@@ -47,4 +46,3 @@ if (result.error != null || result.loading) {
 
 // Typescript can narrow down our result to a successful one.
 result;
-// ^?

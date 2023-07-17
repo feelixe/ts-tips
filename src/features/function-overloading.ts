@@ -26,8 +26,6 @@ function makeRequest(a: string | https.RequestOptions, b?: string): any {
 
 // Call the function with a single argument
 makeRequest('axakon.se', '/jobs'); // Outputs: "John Doe"
-// ^?
 
 // Call the function with two arguments
 makeRequest({ path: '/jobs', host: 'axakon.se', defaultPort: 443 }); // Outputs: "John Doe"
-// ^?

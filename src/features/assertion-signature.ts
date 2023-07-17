@@ -21,13 +21,9 @@ function getSession(): Session | null {
 const maybeSession = getSession();
 
 // Check type before assertion, it's of type UnknownEmployee
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 maybeSession;
-//  ^?
 
 assertSession(maybeSession);
 
 // Check type after assertion, it's of type Employee
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 maybeSession;
-//  ^?

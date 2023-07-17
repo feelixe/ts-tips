@@ -19,12 +19,10 @@ const stringOrNumber = getValue();
 
 // Here, 'stringOrNumber' can be either string or number.
 stringOrNumber;
-// ^?
 
 if (isString(stringOrNumber)) {
   // In this scope, TypeScript infers 'stringOrNumber' as a string due to the type guard.
   stringOrNumber;
-  // ^?
 }
 
 // Use-case example:
@@ -35,7 +33,6 @@ const elements = [1, 2, 3, null];
 
 // Typescript can't not infer that our array not only contains non-null values.
 const filteredElements = elements.filter((el) => el !== null);
-//     ^?
 
 // Let's create a generic type predicate to filter out null values.
 function isNotNull<TValue>(arg: TValue): arg is Exclude<TValue, null> {
@@ -44,4 +41,3 @@ function isNotNull<TValue>(arg: TValue): arg is Exclude<TValue, null> {
 
 // Filtering with the type predicate, typescript can infer the result is an array of numbers.
 const predicateFilteredElements = elements.filter(isNotNull);
-//     ^?

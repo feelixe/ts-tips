@@ -22,12 +22,10 @@ export class Client {
   // After the session is verified to be not null, it checks the `session` property again.
   public someMethod() {
     this.session;
-    //    ^? At this point, session could be null or a Session.
 
     this.assertIsAuthenticated();
-    // After calling this, we're sure that session is not null, if it was null, an error would have been thrown.
 
+    // After calling this, we're sure that session is not null, if it was null, an error would have been thrown.
     this.session;
-    //    ^? Now, the session is definitely not null (is a Session), because of the assertion.
   }
 }
