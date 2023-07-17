@@ -10,6 +10,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["*/**/*.test.ts"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-unused-expressions": 0,

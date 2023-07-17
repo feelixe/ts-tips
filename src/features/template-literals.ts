@@ -7,12 +7,9 @@ type Url = `${Protocol}://${string}`;
 // Initialize a constant 'url' of type 'Url' with a 'https' URL as its value.
 const url: Url = 'http://axakon.se';
 
-
-
-
 // Another example with union types
 
-type PlanType = "Basic" | "Standard" | "Premium";
-type Duration = "Monthly" | "Quarterly" | "Yearly";
+type PlanType = 'Basic' | 'Standard' | 'Premium';
+type Duration = 'Monthly' | 'Quarterly' | 'Yearly';
 
 type SubscriptionLabel = `${PlanType} ${Duration}`;

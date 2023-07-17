@@ -1,4 +1,4 @@
-import https from "https"
+import https from 'https';
 
 /**
  * Function overloading in TypeScript is a feature that allows you to have multiple
@@ -14,20 +14,20 @@ function makeRequest(host: string, path: string): any;
 function makeRequest(request: https.RequestOptions): any;
 function makeRequest(a: string | https.RequestOptions, b?: string): any {
   let request: https.RequestOptions;
-  if(typeof a === "string") {
-    request = { host: a, path: b }
+  if (typeof a === 'string') {
+    request = { host: a, path: b };
   } else {
     request = a;
   }
-  return https.request(request)
+  return https.request(request);
 }
 
 // Checking the types, we get different implementations depending on the arguments we pass.
 
 // Call the function with a single argument
-makeRequest("axakon.se", "/jobs"); // Outputs: "John Doe"
+makeRequest('axakon.se', '/jobs'); // Outputs: "John Doe"
 // ^?
 
 // Call the function with two arguments
-makeRequest({ path: "/jobs", host: "axakon.se", defaultPort: 443 }); // Outputs: "John Doe"
+makeRequest({ path: '/jobs', host: 'axakon.se', defaultPort: 443 }); // Outputs: "John Doe"
 // ^?

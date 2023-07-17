@@ -23,7 +23,9 @@
     "prisma": "^5.0.0",
     "typedoc": "^0.24.8",
     "typescript": "5.2.0-beta",
-    "vite-node": "^0.31.4"
+    "vite": "^4.4.4",
+    "vite-node": "^0.31.4",
+    "vitest": "^0.33.0"
   },
   "dependencies": {
     "@prisma/client": "5.0.0",
@@ -31,6 +33,7 @@
     "@types/react": "^18.2.15",
     "consola": "^3.2.3",
     "drizzle-orm": "^0.27.2",
+    "ky": "^0.33.3",
     "pg": "^8.11.1",
     "react": "^18.2.0",
     "sqlite3": "^5.1.6",

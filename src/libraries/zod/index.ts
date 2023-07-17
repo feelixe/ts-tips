@@ -7,20 +7,29 @@ import { z } from 'zod';
  */
 
 // Define a Zod schema to validate the structure of person objects.
-const personSchema = z.object({
-  // Name field must be a string.
-  name: z.string(),
-  // Age field must be a number and at least 18.
-  age: z.number().min(18),
-  // Email field must be a string and a valid email format.
-  email: z.preprocess((rawData) => rawData, z.string().email()),
-});
+const personSchema = z
+  .object({
+    // Name field must be a string.
+    name: z.string().trim(),
+    // Role can be one from a union of literals
+    role: z.union([
+      z.literal('front-end'),
+      z.literal('back-end'),
+      z.literal('full-stack'),
+    ]),
+    // YearsExperience field must be a number and at least 0.
+    yearsExperience: z.number().min(0),
+    // Email field must be a string and a valid email format.
+    email: z.string().email().toLowerCase().endsWith('@axakon.se'),
+  })
+  .transform((person) => ({ ...person, senior: person.yearsExperience >= 5 }));
 
 // Define an example user input object to demonstrate the validation process.
 const userInput = {
-  name: 'Sheep',
-  age: 16,
-  email: 'sheep@axakon.se',
+  name: ' Sheep',
+  role: 'front-end',
+  yearsExperience: 7,
+  email: 'Sheep@Axakon.se',
 };
 
 // Validate the user input using the Zod schema.
@@ -32,3 +41,5 @@ const person = personSchema.parse(userInput);
 // To access the inferred type of a zod schema use z.infer
 type Person = z.infer<typeof personSchema>;
 //     ^?
+
+console.log(person);

@@ -1,36 +1,55 @@
-import consola from "consola"
+import consola from 'consola';
+import ky, { type KyResponse } from 'ky';
+import { type JSONValue } from './json-value.js';
 
-// A type representing a http request.
-type Request = {
+// Example type representing a http requests.
+interface HttpRequest {
   url: string;
-  method: "GET" | "POST"
+  body?: JSONValue;
 }
 
 // Create a descriptor type for a method that accepts a request.
-type RequestMethod = TypedPropertyDescriptor<(request: Request) => void>
+type RequestMethod = TypedPropertyDescriptor<
+  (request: HttpRequest, ...args: any[]) => Promise<KyResponse>
+>;
 
 // Then we create our decorator.
-function log(target: any, propertyName: string, descriptor: RequestMethod) {
-  // We save the orignal value of our descriptor.
-  let method = descriptor.value!;
+function logRequest(
+  target: any,
+  propertyName: string,
+  descriptor: RequestMethod,
+) {
+  // We save the original value of our descriptor.
+  const method = descriptor.value;
+  if (method === undefined) {
+    throw new Error('method is not defined');
+  }
 
-  // Now we change the behaviour of the descriptor 
-  descriptor.value = function (req: Request) {
-    // We log the request and then call the orignal method.
-    consola.info(`${req.method} request to ${req.url}`)
-    return method.apply(this, [req]);
+  // Now we change the value of the descriptor
+  descriptor.value = async function (req: HttpRequest, ...args: any[]) {
+    // We log the request and then call the original method.
+    consola.info(`Request to ${req.url}`);
+    const res = await method.apply(this, [req, ...args]);
+    consola.info(`Response from (${res.statusText} ${res.status}) ${req.url}`);
+    return res;
   };
 }
 
-
 // Applying the decorators
 class Client {
-  @log
-  makeRequest(req: Request) {
-    console.log(`request to ${req.url}`);
+  @logRequest
+  async get(req: HttpRequest) {
+    return await ky(req.url, { method: 'get' });
   }
-  
+
+  @logRequest
+  async post(req: HttpRequest) {
+    return await ky(req.url, { method: 'post' });
+  }
 }
 
 const client = new Client();
-client.makeRequest({ url: "https://axakon.se", method: "GET" });
+
+await client.get({
+  url: 'https://axakon.se',
+});
