@@ -8,8 +8,5 @@ interface Country {
 // and the rest (...Country[]) could be any number of Country elements, including zero.
 type Countries = [Country, Country, ...Country[]];
 
-// This will fail because the 'Countries' type expects at least two elements, but we're only providing one.
-const countriesOne: Countries = [{ name: 'Sweden' }];
-
 // This will pass as we have provided at least two Country elements, which complies with the 'Countries' type.
 const countriesTwo: Countries = [{ name: 'Sweden' }, { name: 'Finland' }];

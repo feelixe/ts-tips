@@ -20,9 +20,6 @@ function getSession(): Session | null {
 // Example type
 const maybeSession = getSession();
 
-// Check type before assertion, it's of type UnknownEmployee
-maybeSession;
-
 assertSession(maybeSession);
 
 // Check type after assertion, it's of type Employee

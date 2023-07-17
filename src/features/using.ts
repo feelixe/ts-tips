@@ -22,7 +22,6 @@ async function getDatabaseClient() {
   return {
     client,
     [Symbol.dispose]: async () => {
-      console.log('cleaning up database connection');
       client.close()
     },
   };
