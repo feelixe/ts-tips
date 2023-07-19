@@ -1,20 +1,21 @@
 {
-    "compilerOptions": {
-      "target": "esnext",
-      "moduleResolution": "nodenext",            
-      "module": "nodenext",                  
-      "strict": true,                        
-      "esModuleInterop": true,               
-      "forceConsistentCasingInFileNames": true,
-      "experimentalDecorators": true,
-      "jsx": "react"
-    },
-    "include": [
-      "src/**/*.ts",                      
-      "src/**/*.tsx"                         
-, "src/features/jsdoc.js"    ],
-    "exclude": [
-      "node_modules",                        
-      "**/*.test.ts"                         
-    ]
-  }
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/features/10-jsdoc.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
+}
