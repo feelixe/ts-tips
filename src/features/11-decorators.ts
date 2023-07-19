@@ -1,6 +1,6 @@
 import consola from 'consola';
 import ky, { type KyResponse } from 'ky';
-import { type JSONValue } from './json-value.js';
+import { type JSONValue } from './8-json-value.js';
 
 // Example type representing a http requests.
 interface HttpRequest {
