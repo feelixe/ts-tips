@@ -9,39 +9,36 @@
  */
 
 /**
- * Sums up an array of numbers.
- * @param {Numbers} numbers The numbers to sum up
- * @returns {number} sum of the numbers
+ * Calculates the mean (average) of an array of numbers.
+ * @param {Numbers} numbers
+ * @returns {number}
  * @example
- * const arraySum = sum([1, 2, 3]); // arraySum = 6
+ * mean([1, 2, 3, 4, 5]); // returns 3
  */
-export function sum(numbers) {
-  return numbers.reduce((s, n) => s + n, 0);
+export function mean(numbers) {
+  const sum = numbers.reduce((sum, value) => sum + value, 0);
+  const count = numbers.length;
+  return sum / count;
 }
 
-// Some extra tags that are useful.
-
 /**
- * Sums up an array of numbers.
- * @param {Numbers} numbers The numbers to sum up
- * @returns {number} the sum of numbers
- * @deprecated use {@link sum} instead.
+ * Calculates the average of all numbers pased of numbers.
+ * @deprecated Use {@link mean} instead
+ * @param {Numbers} numbers
+ * @returns {number}
  * @example
- * const sum = sumNumbers(1, 2, 3); // sum = 6
+ * average(1, 2, 3, 4, 5); // returns 3
  */
-export function sumNumbers(...numbers) {
-  return numbers.reduce((s, n) => s + n, 0);
+export function average(...numbers) {
+  const sum = numbers.reduce((sum, value) => sum + value, 0);
+  const count = numbers.length;
+  return sum / count;
 }
 
-sumNumbers(1, 2, 3);
+average(1, 2, 3);
 
 /**
- * @todo Write the documentation.
- * @todo Implement this function.
+ * Returns the mode from an array of numbers.
+ * @see {@link https://example.com documentation}
  */
-export function coerceSum() {}
-
-/**
- * Check out the {@link https://example.com documentation} for more information.
- */
-export function max() {}
+export function mode() {}
