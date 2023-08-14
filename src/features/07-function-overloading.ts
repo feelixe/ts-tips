@@ -28,7 +28,7 @@ function scale(
   multiplier: number,
 ): Circle | Square | Rectangle {
   if (shape instanceof Circle) {
-    return new Circle(shape.radius * (multiplier / 2));
+    return new Circle(shape.radius * multiplier);
   }
   if (shape instanceof Square) {
     return new Square(shape.side * multiplier);

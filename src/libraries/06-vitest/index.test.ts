@@ -10,7 +10,7 @@ import { describe, it, expect } from 'vitest';
 import sum from "./sum"
 
 describe('sum', () => {
-    it('should correctly sum up the numbers', () => {
+    it('should correctly sum up the arguments', () => {
         expect(sum(1, 2, 3)).toBe(6);
         expect(sum(5, 5, 5, 5)).toBe(20);
         expect(sum(0)).toBe(0);
@@ -19,7 +19,6 @@ describe('sum', () => {
 
     it('should handle floating point numbers', () => {
         expect(sum(1.5, 2.5, 3.5)).toBeCloseTo(7.5);
-        const hej = sum(0.2, 0.1)
         expect(sum(0.2 + 0.1)).toBeCloseTo(0.3);
     });
 
