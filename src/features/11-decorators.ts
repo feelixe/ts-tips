@@ -1,55 +1,94 @@
 import consola from 'consola';
-import ky, { type KyResponse } from 'ky';
-import { type JSONValue } from './08-json-value.js';
+import ky, { type Options, type KyResponse } from 'ky';
 
-// Example type representing a http requests.
-interface HttpRequest {
-  url: string;
-  body?: JSONValue;
-}
-
-// Create a descriptor type for a method that accepts a request.
-type RequestMethod = TypedPropertyDescriptor<
-  (request: HttpRequest, ...args: any[]) => Promise<KyResponse>
->;
-
-// Then we create our decorator.
+// Some example decorators
 function logRequest(
   target: any,
   propertyName: string,
-  descriptor: RequestMethod,
+  descriptor: TypedPropertyDescriptor<
+    (url: string, options?: Options) => Promise<KyResponse>
+  >,
 ) {
   // We save the original value of our descriptor.
-  const method = descriptor.value;
-  if (method === undefined) {
-    throw new Error('method is not defined');
-  }
+  const method = descriptor.value!;
 
   // Now we change the value of the descriptor
-  descriptor.value = async function (req: HttpRequest, ...args: any[]) {
+  descriptor.value = async function (url: string, options?: Options) {
     // We log the request and then call the original method.
-    consola.info(`Request to ${req.url}`);
-    const res = await method.apply(this, [req, ...args]);
-    consola.info(`Response from (${res.statusText} ${res.status}) ${req.url}`);
+    consola.info(`Request to ${url}`);
+    const res = await method.apply(this, [url, options]);
+    consola.success(`Response from (${res.statusText} ${res.status}) ${url}`);
     return res;
+  };
+}
+
+function logExecutionTime(
+  target: any,
+  propertyName: string,
+  descriptor: TypedPropertyDescriptor<(...args: any[]) => any>,
+) {
+  const method = descriptor.value!;
+
+  descriptor.value = async function (...args: any[]) {
+    const startedAt = performance.now();
+    const res = await method.apply(this, args);
+    const completedAt = performance.now();
+    const duration = completedAt - startedAt;
+    consola.info(`Method '${propertyName}' took ${Math.floor(duration)} ms`);
+    return res;
+  };
+}
+
+function cache(cacheTimeInMs: number) {
+  let cachedValue: any;
+  let cachedValueExpiresAt: number;
+  return function cacheInner(
+    target: any,
+    propertyName: string,
+    descriptor: TypedPropertyDescriptor<(...args: any[]) => any>,
+  ) {
+    const method = descriptor.value!;
+    descriptor.value = async function (...args: any[]) {
+      if (
+        cachedValue !== undefined &&
+        new Date().valueOf() < cachedValueExpiresAt
+      ) {
+        consola.success('Cache hit');
+        return cachedValue;
+      }
+      consola.warn('Cache miss');
+      const res = await method.apply(this, args);
+      cachedValue = res;
+      cachedValueExpiresAt = new Date().valueOf() + cacheTimeInMs;
+      return res;
+    };
   };
 }
 
 // Applying the decorators
 class Client {
+  public token?: string;
+
+  @logExecutionTime
   @logRequest
-  async get(req: HttpRequest) {
-    return await ky(req.url, { method: 'get' });
+  async get(url: string, options?: Options) {
+    return await ky(url, { method: 'get', ...options });
   }
 
+  @logExecutionTime
   @logRequest
-  async post(req: HttpRequest) {
-    return await ky(req.url, { method: 'post' });
+  async post(url: string, options?: Options) {
+    return await ky(url, { method: 'post', ...options });
+  }
+
+  @cache(500)
+  async getJobs() {
+    return await this.get('https://axakon.se/career');
   }
 }
 
 const client = new Client();
 
-await client.get({
-  url: 'https://axakon.se',
-});
+await client.getJobs();
+await client.getJobs();
+await client.getJobs();
