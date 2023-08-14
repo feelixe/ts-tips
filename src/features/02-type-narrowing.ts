@@ -28,9 +28,9 @@ type Result = SuccessResult | ErrorResult | LoadingResult;
 // Define a function that simulates getting data. For now, it just returns a loading result.
 function getData(): Result {
   return {
-    loading: true,
+    loading: false,
     error: null,
-    data: null,
+    data: { name: 'Axakon' },
   };
 }
 

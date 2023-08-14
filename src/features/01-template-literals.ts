@@ -9,7 +9,6 @@ const url: Url = 'http://axakon.se';
 
 // Another example with union types.
 
-type PlanType = 'Basic' | 'Standard' | 'Premium';
-type Duration = 'Monthly' | 'Quarterly' | 'Yearly';
+type Sites = 'axakon.se' | 'bybrick.se';
 
-export type SubscriptionLabel = `${PlanType} ${Duration}`;
+export type SubscriptionLabel = `${Protocol}://${Sites}`;
