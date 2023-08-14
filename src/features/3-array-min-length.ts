@@ -9,4 +9,4 @@ interface Country {
 type Countries = [Country, Country, ...Country[]];
 
 // This will pass as we have provided at least two Country elements, which complies with the 'Countries' type.
-const countriesTwo: Countries = [{ name: 'Sweden' }, { name: 'Finland' }];
+const countries: Countries = [{ name: 'Sweden' }, { name: 'Finland' }];
