@@ -9,7 +9,7 @@
  */
 
 /**
- * Calculates the mean (average) of an array of numbers.
+ * Calculates the mean of an array of numbers.
  * @param {Numbers} numbers
  * @returns {number}
  * @example
@@ -21,8 +21,10 @@ export function mean(numbers) {
   return sum / count;
 }
 
+mean([1, 2, 3, 4]);
+
 /**
- * Calculates the average of all numbers pased of numbers.
+ * Calculates the average of all numbers passed of numbers.
  * @deprecated Use {@link mean} instead
  * @param {Numbers} numbers
  * @returns {number}
@@ -35,7 +37,7 @@ export function average(...numbers) {
   return sum / count;
 }
 
-average(1, 2, 3);
+average(1, 2, 3, 4);
 
 /**
  * Returns the mode from an array of numbers.
