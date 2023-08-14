@@ -1,19 +1,44 @@
-/**
- * If for whatever reason you don't want to use a .ts file, and there for
- * skip the transpilation step, you can still leverage the power of typescript
- * by adding //@ts-check to the top of the file and declare your types with
- * JSDoc instead.
- */
-
 // @ts-check
 
+// If, for any reason, you'd rather not use a .ts file, you don't have to miss out on TypeScript.
+// You can simply add //@ts-check at the top of your file and declare your types using JSDoc.
+
 /**
- * Returns the sum of an array of numbers
- * @param {number[]} numbers The numbers to sum up
- * @returns {number} the sum of numbers
+ * An array of numbers
+ * @typedef {Array<number>} Numbers
  */
-export function sum(numbers) {
-  return numbers.reduce((s, n) => s + n, 0);
+
+/**
+ * Calculates the mean (average) of an array of numbers.
+ * @param {Numbers} numbers
+ * @returns {number}
+ * @example
+ * mean([1, 2, 3, 4, 5]); // returns 3
+ */
+export function mean(numbers) {
+  const sum = numbers.reduce((sum, value) => sum + value, 0);
+  const count = numbers.length;
+  return sum / count;
 }
 
-sum([1, 2, 3]);
+/**
+ * Calculates the average of all numbers pased of numbers.
+ * @deprecated Use {@link mean} instead
+ * @param {Numbers} numbers
+ * @returns {number}
+ * @example
+ * average(1, 2, 3, 4, 5); // returns 3
+ */
+export function average(...numbers) {
+  const sum = numbers.reduce((sum, value) => sum + value, 0);
+  const count = numbers.length;
+  return sum / count;
+}
+
+average(1, 2, 3);
+
+/**
+ * Returns the mode from an array of numbers.
+ * @see {@link https://example.com documentation}
+ */
+export function mode() {}
