@@ -41,7 +41,7 @@ function logExecutionTime(
 
 function cache(cacheTimeInMs: number) {
   let cachedValue: any;
-  let cachedValueExpiresAt: number;
+  let cachedValueExpiresAt: number = 0;
   return function cacheInner(
     target: any,
     propertyName: string,
@@ -56,7 +56,7 @@ function cache(cacheTimeInMs: number) {
         consola.success('Cache hit');
         return cachedValue;
       }
-      consola.warn('Cache miss');
+      consola.fail('Cache miss');
       const res = await method.apply(this, args);
       cachedValue = res;
       cachedValueExpiresAt = new Date().valueOf() + cacheTimeInMs;
@@ -65,23 +65,45 @@ function cache(cacheTimeInMs: number) {
   };
 }
 
+function retry(numberOfRetries: number) {
+  return function retryInner(
+    target: any,
+    propertyName: string,
+    descriptor: TypedPropertyDescriptor<(...args: any[]) => any>,
+  ) {
+    const method = descriptor.value!;
+    descriptor.value = async function (...args: any[]) {
+      for (let retryCount = 1; retryCount <= numberOfRetries; retryCount++) {
+        try {
+          const res = await method.apply(this, args);
+          return res;
+        } catch (e) {
+          consola.warn(`Retrying ${propertyName}`);
+          if (retryCount === numberOfRetries) {
+            throw e;
+          }
+        }
+      }
+    };
+  };
+}
+
 // Applying the decorators
 class Client {
   public token?: string;
 
-  @logExecutionTime
   @logRequest
   async get(url: string, options?: Options) {
     return await ky(url, { method: 'get', ...options });
   }
 
-  @logExecutionTime
   @logRequest
   async post(url: string, options?: Options) {
     return await ky(url, { method: 'post', ...options });
   }
 
-  @cache(500)
+  @cache(60000)
+  @retry(3)
   async getJobs() {
     return await this.get('https://axakon.se/career');
   }
@@ -89,6 +111,5 @@ class Client {
 
 const client = new Client();
 
-await client.getJobs();
 await client.getJobs();
 await client.getJobs();
