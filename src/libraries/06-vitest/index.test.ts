@@ -1,5 +1,5 @@
 /**
- * Vitest is by far the easiest way to set up test suites when using type scripts.
+ * Vitest is by far the easiest way to set up test suites when using typescript.
  * It requires little or no configuration.
  * 1. pnpm install -D vite vitest
  * 2. Create a file.test.ts

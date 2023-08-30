@@ -4,7 +4,7 @@
  * - Only uses javascript.
  * - No code generation.
  * - Runs on the Edge.
- * - Better performance
+ * - Better performance, not binary
  */
 
 import { drizzle } from 'drizzle-orm/node-postgres';
