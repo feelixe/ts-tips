@@ -1,5 +1,6 @@
-// Define a type 'Url' which represents a string template type.
-// It restricts string to follow the pattern of either a 'https' or 'http' URL.
+// Template literals in TypeScript allow for type-safe string interpolation.
+// This powerful feature lets you embed types within string patterns.
+
 type Protocol = 'http' | 'https';
 
 type Url = `${Protocol}://${string}`;

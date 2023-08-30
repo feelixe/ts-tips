@@ -47,3 +47,27 @@ const smallerSquare = scale(square, 0.5);
 
 const rectangle = new Rectangle(10, 5);
 const biggerRectangle = scale(rectangle, 1.5);
+
+/**
+ *
+ * Without overloading, typescript cannot infer the return type based on our arguments.
+ *
+ */
+function resize(
+  shape: Circle | Square | Rectangle,
+  multiplier: number,
+): Circle | Square | Rectangle {
+  if (shape instanceof Circle) {
+    return new Circle(shape.radius * multiplier);
+  }
+  if (shape instanceof Square) {
+    return new Square(shape.side * multiplier);
+  }
+  if (shape instanceof Rectangle) {
+    return new Rectangle(shape.width * multiplier, shape.height * multiplier);
+  }
+  throw new Error('Invalid shape');
+}
+
+const circle2 = new Circle(10);
+const biggerCircle2 = resize(circle, 2);

@@ -90,16 +90,9 @@ function retry(numberOfRetries: number) {
 
 // Applying the decorators
 class Client {
-  public token?: string;
-
   @logRequest
   async get(url: string, options?: Options) {
     return await ky(url, { method: 'get', ...options });
-  }
-
-  @logRequest
-  async post(url: string, options?: Options) {
-    return await ky(url, { method: 'post', ...options });
   }
 
   @cache(60000)

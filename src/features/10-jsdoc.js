@@ -38,9 +38,3 @@ export function average(...numbers) {
 }
 
 average(1, 2, 3, 4);
-
-/**
- * Returns the mode from an array of numbers.
- * @see {@link https://example.com documentation}
- */
-export function mode() {}
