@@ -13,7 +13,7 @@ function getDatabase() {
   return {
     pool,
     [Symbol.dispose]: async () => {
-      pool.end();
+      await pool.end();
     },
   };
 }

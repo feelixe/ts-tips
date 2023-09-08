@@ -95,8 +95,9 @@ class Client {
     return await ky(url, { method: 'get', ...options });
   }
 
-  @cache(60000)
-  @retry(3)
+  // @logExecutionTime
+  // @cache(60000)
+  // @retry(3)
   async getJobs() {
     return await this.get('https://axakon.se/career');
   }

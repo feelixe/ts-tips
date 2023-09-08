@@ -12,7 +12,7 @@ const isString = (arg: any): arg is string => {
   return typeof arg === 'string';
 };
 
-// Define a function that simulates getting data. For now, it just returns an empty string.
+// Some function that we get our data from.
 const getValue = (): string | number => '';
 
 const stringOrNumber = getValue();

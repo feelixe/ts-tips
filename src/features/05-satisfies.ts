@@ -13,7 +13,7 @@ const configOne: StyleConfig = {
   fontFamily: 'Poppins',
 };
 
-configOne.colors;
+configOne.colors?.black;
 
 // Instead of assigning the type, we can make sure our variable satisfies that type without
 // having a strict type.

@@ -27,9 +27,9 @@ mean([1, 2, 3, 4]);
  * Calculates the average of all numbers passed of numbers.
  * @deprecated Use {@link mean} instead
  * @param {Numbers} numbers
- * @returns {number}
+ * @returns {number} Returns the average of argument `numbers`
  * @example
- * average(1, 2, 3, 4, 5); // returns 3
+ * average(1, 2, 3, 4, 5); // Returns 3
  */
 export function average(...numbers) {
   const sum = numbers.reduce((sum, value) => sum + value, 0);
