@@ -12,7 +12,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/features/10-jsdoc.js"
+    "src/features/11-jsdoc.js"
   ],
   "exclude": [
     "node_modules",
